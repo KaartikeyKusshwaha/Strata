@@ -47,8 +47,14 @@ def install_addon_files() -> pathlib.Path:
 
 
 def enable_addon():
+    # refresh_script_paths() forces Blender to rescan its addons directories
+    # after the manual shutil.copytree() above, without this the module cache
+    # still points at the old (empty) state and addon_enable raises
+    # ModuleNotFoundError: No module named 'strata_addon'.
+    bpy.utils.refresh_script_paths()
     bpy.ops.preferences.addon_enable(module=INSTALLED_MODULE_NAME)
     bpy.ops.wm.save_userpref()
+
 
 
 if __name__ == "__main__":
