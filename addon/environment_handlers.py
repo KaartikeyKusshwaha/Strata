@@ -272,3 +272,98 @@ def handle_build_sun(**config) -> dict:
     coll.objects.link(lamp_obj)
     
     return {"ok": True, "sun_object": sun_obj.name, "lamp_object": lamp_obj.name}
+
+
+def handle_build_water(**config) -> dict:
+    mode = config.get('mode', 'day').lower()
+    collection_name = config.get('collection_name', 'P1 Water')
+    object_name = config.get('object_name', 'A1_Water_Single_Mesh')
+    material_name = config.get('material_name', 'A1 WORLD_1 Water Surface')
+    dimensions = config.get('dimensions', (386.0, 400.0, 38.0))
+    location = config.get('location', (0.0, 0.0, 0.0))
+    
+    coll = _get_or_create_collection(collection_name)
+    
+    obj = bpy.data.objects.get(object_name)
+    if not obj:
+        mesh = bpy.data.meshes.new("WaterMesh")
+        obj = bpy.data.objects.new(object_name, mesh)
+        import bmesh
+        bm = bmesh.new()
+        bmesh.ops.create_grid(bm, x_segments=64, y_segments=64, size=1.0)
+        bm.to_mesh(mesh)
+        bm.free()
+        coll.objects.link(obj)
+        
+    obj.scale = (dimensions[0]/2.0, dimensions[1]/2.0, dimensions[2]/2.0)
+    obj.location = location
+    
+    mat = bpy.data.materials.get(material_name)
+    if not mat:
+        mat = bpy.data.materials.new(material_name)
+    
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
+    nodes.clear()
+    
+    out_node = nodes.new('ShaderNodeOutputMaterial')
+    princ_bsdf = nodes.new('ShaderNodeBsdfPrincipled')
+    geom_pos = nodes.new('ShaderNodeNewGeometry')
+    geom_pos.name = "A1 Water World Position"
+    
+    noise_tex = nodes.new('ShaderNodeTexNoise')
+    noise_tex.name = "A1 Water Broad Ripples"
+    
+    bump_node = nodes.new('ShaderNodeBump')
+    bump_node.name = "A1 Water Micro Bump"
+    
+    if mode == "night":
+        base_color = config.get('night_base_color', (0.006, 0.03, 0.08, 1.0))
+        roughness = config.get('night_roughness', 0.22)
+        ior = config.get('night_ior', 1.333)
+        coat_weight = config.get('night_coat_weight', 0.14)
+        coat_roughness = config.get('night_coat_roughness', 0.18)
+        noise_scale = config.get('night_noise_scale', 0.35)
+        noise_detail = config.get('night_noise_detail', 2.0)
+        noise_roughness = config.get('night_noise_roughness', 0.40)
+        bump_strength = config.get('night_bump_strength', 0.080)
+        bump_distance = config.get('night_bump_distance', 0.120)
+    else:
+        base_color = config.get('day_base_color', (0.01, 0.17, 0.34, 1.0))
+        roughness = config.get('day_roughness', 0.19)
+        ior = config.get('day_ior', 1.333)
+        coat_weight = config.get('day_coat_weight', 0.28)
+        coat_roughness = config.get('day_coat_roughness', 0.12)
+        noise_scale = config.get('day_noise_scale', 0.18)
+        noise_detail = config.get('day_noise_detail', 2.0)
+        noise_roughness = config.get('day_noise_roughness', 0.45)
+        bump_strength = config.get('day_bump_strength', 0.055)
+        bump_distance = config.get('day_bump_distance', 0.055)
+
+    princ_bsdf.inputs['Base Color'].default_value = base_color
+    princ_bsdf.inputs['Roughness'].default_value = roughness
+    princ_bsdf.inputs['IOR'].default_value = ior
+    if 'Coat Weight' in princ_bsdf.inputs:
+        princ_bsdf.inputs['Coat Weight'].default_value = coat_weight
+        princ_bsdf.inputs['Coat Roughness'].default_value = coat_roughness
+        
+    noise_tex.inputs['Scale'].default_value = noise_scale
+    noise_tex.inputs['Detail'].default_value = noise_detail
+    noise_tex.inputs['Roughness'].default_value = noise_roughness
+    
+    bump_node.inputs['Strength'].default_value = bump_strength
+    bump_node.inputs['Distance'].default_value = bump_distance
+    
+    links.new(geom_pos.outputs['Position'], noise_tex.inputs['Vector'])
+    links.new(noise_tex.outputs['Fac'], bump_node.inputs['Height'])
+    links.new(bump_node.outputs['Normal'], princ_bsdf.inputs['Normal'])
+    links.new(princ_bsdf.outputs['BSDF'], out_node.inputs['Surface'])
+    
+    if len(obj.data.materials) == 0:
+        obj.data.materials.append(mat)
+    else:
+        obj.data.materials[0] = mat
+
+    return {"ok": True, "object_name": obj.name, "mode": mode, "material_name": mat.name}
+

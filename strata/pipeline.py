@@ -24,7 +24,10 @@ from .stages import (
     ReadWorldStage, ResolveAssetsStage, OptimizeStage, ChunkManagerStage,
     BuildGeometryStage, RenderPrepStage, AnimationPrepStage,
 )
-from .environment import build_clouds, build_atmosphere, build_sky, build_sun, CloudConfig, AtmosphereConfig, SkyConfig, SunConfig
+from .environment import (
+    build_clouds, build_atmosphere, build_sky, build_sun, build_water,
+    CloudConfig, AtmosphereConfig, SkyConfig, SunConfig, WaterConfig,
+)
 from . import blender_io  # noqa: F401  (imported for save(); kept explicit for clarity)
 
 
@@ -71,11 +74,13 @@ class Pipeline:
         enable_atmosphere: bool = True,
         enable_sky: bool = True,
         enable_sun: bool = True,
+        enable_water: bool = True,
+        water_mode: str = "day",
         cloud_height: float = 19.3,
         sun_angle_deg: float = 45.0,
         hdri_path: str = "",
     ) -> "Pipeline":
-        """Stage 6b: Build environment (clouds, atmosphere, sky, sun)."""
+        """Stage 6b: Build environment (clouds, atmosphere, sky, sun, water)."""
         import math
         results = {}
         if enable_clouds:
@@ -91,8 +96,12 @@ class Pipeline:
             angle_rad = math.radians(sun_angle_deg)
             sun_cfg = SunConfig(lamp_rotation=(angle_rad, 0.0, -2.601))
             results["sun"] = build_sun(sun_cfg)
+        if enable_water:
+            water_cfg = WaterConfig(mode=water_mode)
+            results["water"] = build_water(water_cfg)
         self._state.environment_config = results
         return self
+
 
     def save(self, output_blend_path: str) -> "Pipeline":
         result = blender_io.call("save_scene", output_blend_path=output_blend_path)

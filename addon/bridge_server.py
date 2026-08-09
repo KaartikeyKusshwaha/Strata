@@ -44,6 +44,8 @@ _command_registry["build_clouds"] = environment_handlers.handle_build_clouds
 _command_registry["build_atmosphere"] = environment_handlers.handle_build_atmosphere
 _command_registry["build_sky"] = environment_handlers.handle_build_sky
 _command_registry["build_sun"] = environment_handlers.handle_build_sun
+_command_registry["build_water"] = environment_handlers.handle_build_water
+
 
 
 def _handle_client(conn):
