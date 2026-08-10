@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Agent-driven pipeline: real Minecraft worlds -> chunked, production-ready Blender scenes"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = { text = "GPL-3.0-or-later" }
 dependencies = [
     "mcp[cli]>=1.3.0,<2",
     "anvil-parser2>=0.10.0",

@@ -3,7 +3,7 @@
 **AI-native production pipeline for Blender.**
 
 [![Version](https://img.shields.io/badge/version-v0.1.0-blue.svg)](https://github.com/example/strata)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Blender Version](https://img.shields.io/badge/blender-4.0+-orange.svg)](https://www.blender.org/download/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
@@ -162,4 +162,4 @@ Finally, the SDK is highly extensible through its **Plugin System**. This abstra
 We welcome contributions from everyone! Whether it's adding a new render target, fixing a bug, or improving documentation, your help is appreciated. Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started, our code of conduct, and the pull request process.
 
 ## License
-Strata is released under the [MIT License](LICENSE).
+Strata is released under the [GNU General Public License v3.0](LICENSE). See [NOTICE](NOTICE) for authorship details.
