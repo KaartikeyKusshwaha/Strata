@@ -138,33 +138,41 @@ Finally, the SDK is highly extensible through its **Plugin System**. This abstra
 10. Watch as Strata builds the scene directly in your active Blender session!
 
 ### For Developers
-1. Clone the repository: `git clone https://github.com/example/strata.git`
+1. Clone the repository: `git clone https://github.com/KaartikeyKusshwaha/Strata.git`
 2. Navigate to the project root: `cd strata`
 3. Create a virtual environment: `python -m venv venv`
 4. Activate the virtual environment: `.\venv\Scripts\activate` (Windows) or `source venv/bin/activate` (Mac/Linux)
 5. Install in editable mode with development dependencies: `pip install -e .[dev]`
 6. Run the test suite to verify the installation: `pytest`
 7. Explore the core pipeline logic in the `strata/` directory.
-8. Check out `CONTRIBUTING.md` to learn how to write new plugins.
+8. Check out [`CONTRIBUTING.md`](CONTRIBUTING.md) to learn how to write new plugins.
 
 ---
 
-## Documentation
+## User Instructions & Documentation Links
 
-| Guide | Audience | Description |
-|---|---|---|
-| [Setup](docs/setup.md) | Everyone | Detailed installation instructions for all environments. |
-| [Quick Start](docs/quick-start.md) | Creators | Get up and running with your first world import in minutes. |
-| [Workflows](docs/workflows.md) | Creators | Advanced tutorials on lighting, rendering, and chunk management. |
-| [Architecture](docs/architecture.md) | Developers | Deep dive into the SDK, Pipeline, Bridge, and Plugin systems. |
-| [Roadmap](docs/roadmap.md) | Everyone | What we're building next and our long-term vision. |
-| [Contributing](docs/contributing.md) | Developers | How to submit PRs, write plugins, and run tests. |
-| [Vision](docs/vision.md) | Everyone | The philosophy behind AI-native production tools. |
+Everything you need is documented in detail across the `docs/` directory. Click the links below for your specific use case:
+
+### 🎨 For Creators & Users (No Coding Required)
+If you just want to use Strata to import Minecraft worlds into Blender, generate environment atmospheres, and render scenes:
+
+- **[Installation & Setup Guide (`docs/SETUP.md`)](docs/SETUP.md)**: Detailed requirements, installing the Blender addon, directory structure, and configuring `strata-mcp` in Claude Desktop / Antigravity settings.
+- **[Quickstart: Import Your First World (`docs/QUICKSTART.md`)](docs/QUICKSTART.md)**: 10-minute step-by-step guide to starting the bridge server, connecting the MCP server, passing your Minecraft save folder + chunk coordinates + self-made or web-downloaded block library `.blend` file, and rendering.
+- **[Production Workflows (`docs/WORKFLOWS.md`)](docs/WORKFLOWS.md)**: Complete guide to generating day/night water bodies, blocky clouds, atmospheric height fog, sun/sky setups, managing 1000+ chunk worlds, and day-to-day viewport toggling.
+
+### 🛠️ For Developers & Contributors
+If you want to build plugins, extend pipeline stages, or contribute to the repository:
+
+- **[Architecture Deep-Dive (`docs/ARCHITECTURE.md`)](docs/ARCHITECTURE.md)**: "Two doors, one pipeline" design, 7-stage SDK execution model, thread-safe socket bridge protocol (`:9877`), and plugin extension points.
+- **[Project Roadmap (`docs/ROADMAP.md`)](docs/ROADMAP.md)**: Future milestones (Litematica schematics, Unreal USD exports, timeline animation).
+- **[Contributing Guide (`CONTRIBUTING.md`)](CONTRIBUTING.md)**: Code style, PR guidelines, and running the `pytest` test suite.
+- **[Project Manifesto (`VISION.md`)](VISION.md)**: The underlying philosophy behind turning production workflows into reusable software.
 
 ---
 
 ## Contributing
-We welcome contributions from everyone! Whether it's adding a new render target, fixing a bug, or improving documentation, your help is appreciated. Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started, our code of conduct, and the pull request process.
+We welcome contributions from everyone! Whether it's adding a new render target, fixing a bug, or improving documentation, your help is appreciated. Please see our [`CONTRIBUTING.md`](CONTRIBUTING.md) for details on how to get started, our code of conduct, and the pull request process.
 
 ## License
 Strata is released under the [GNU General Public License v3.0](LICENSE). See [NOTICE](NOTICE) for authorship details.
+
