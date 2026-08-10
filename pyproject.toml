@@ -1,6 +1,6 @@
 [project]
 name = "strata"  # fallback "strata-mc" if unavailable on PyPI — see Section 6
-version = "0.1.0"
+version = "0.4.0"
 description = "Agent-driven pipeline: real Minecraft worlds -> chunked, production-ready Blender scenes"
 readme = "README.md"
 requires-python = ">=3.10"

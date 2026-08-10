@@ -2,7 +2,7 @@
 
 **AI-native production pipeline for Blender.**
 
-[![Version](https://img.shields.io/badge/version-v0.1.0-blue.svg)](https://github.com/example/strata)
+[![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](https://github.com/KaartikeyKusshwaha/Strata)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Blender Version](https://img.shields.io/badge/blender-4.0+-orange.svg)](https://www.blender.org/download/)
@@ -23,7 +23,7 @@ graph LR
 
 ## Current Capabilities
 
-Strata is currently focused on solving the first stage of a Minecraft production pipeline: reconstructing real Minecraft worlds inside Blender in a way that remains practical to edit. Version 1 imports world data, rebuilds it using the user's own block library, and organizes the result into chunked collections for efficient viewport workflows. The screenshots below demonstrate the current implementation rather than future goals.
+Strata is currently focused on solving the first stage of a Minecraft production pipeline: reconstructing real Minecraft worlds inside Blender in a way that remains practical to edit. The current release imports world data, rebuilds it using the user's own block library, and organizes the result into chunked collections for efficient viewport workflows. The screenshots below demonstrate the current implementation rather than future goals.
 
 ### Individual Chunk
 ![Individual Chunk](docs/images/individual_chunk.png)
@@ -33,7 +33,7 @@ A reconstructed Minecraft chunk inside Blender. Every block remains a real Blend
 ### Chunk Groups
 ![Chunk Groups](docs/images/chunk_groups.png)
 
-Multiple chunks reconstructed together while preserving the same editable structure. As worlds become larger, chunk organization becomes increasingly important for viewport performance and scene management. Version 1 automatically generates chunk collections that make large environments significantly easier to navigate and edit inside Blender.
+Multiple chunks reconstructed together while preserving the same editable structure. As worlds become larger, chunk organization becomes increasingly important for viewport performance and scene management. Strata automatically generates chunk collections that make large environments significantly easier to navigate and edit inside Blender.
 
 ### Full World Reconstruction
 ![Full World Reconstruction](docs/images/full_world.jpg)
@@ -52,9 +52,9 @@ Production-quality water surfaces with mode-aware shading. The pipeline generate
 
 ---
 
-## What Version 1 Delivers
+## What v0.4 Delivers
 
-Version 1 is laser-focused on establishing a robust, deterministic infrastructure for Minecraft imports and environment setup. It provides:
+The current release is focused on establishing a robust, deterministic infrastructure for Minecraft imports and environment setup. It provides:
 
 - **Minecraft world reconstruction**: Accurately parsing and interpreting `.mca` region files.
 - **User block library population**: Dynamically mapping Minecraft block IDs to the user's custom Blender assets.

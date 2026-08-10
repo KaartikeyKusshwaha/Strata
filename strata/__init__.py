@@ -3,4 +3,4 @@ from .pipeline import Pipeline
 from .pipeline_state import PipelineState
 
 __all__ = ["Pipeline", "PipelineState"]
-__version__ = "0.1.0"
+__version__ = "0.4.0"
