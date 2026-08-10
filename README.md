@@ -46,6 +46,10 @@ A complete Minecraft world reconstructed inside Blender using the same pipeline.
 
 Procedural Minecraft-style blocky clouds and atmospheric environment system reconstructed inside Blender. The pipeline automatically generates 2km 3D blocky cloud layer footprints featuring micro-normal noise bump shaders, bevel edges, and vertical height-gradient color ramps—adaptable across daytime and nighttime sky lighting setups.
 
+### Procedural Water Bodies
+
+Production-quality water surfaces with mode-aware shading. The pipeline generates a procedural water mesh with a full Principled BSDF shader tree (Geometry Position → Noise Texture → Bump → Principled BSDF) that adapts between daytime and nighttime scenes. Daytime water uses brighter ocean turquoise tones with tight surface ripples, while nighttime water shifts to deep midnight navy with stronger moonlit bump contrast — all extracted from real production `.blend` files.
+
 ---
 
 ## What Version 1 Delivers
@@ -56,6 +60,7 @@ Version 1 is laser-focused on establishing a robust, deterministic infrastructur
 - **User block library population**: Dynamically mapping Minecraft block IDs to the user's custom Blender assets.
 - **Chunk generation**: Grouping geometry into 16x16 chunk collections for high-performance viewport navigation.
 - **Procedural cloud & environment generation**: Automatic 2km blocky cloud layers, atmospheric height fog, HDRI sky preservation, and visible sun mesh with independent directional lighting.
+- **Procedural water bodies**: Mode-aware water surfaces (day/night) with production-tuned Principled BSDF shaders, noise-driven ripple normals, and adaptive coat/bump parameters extracted from real `.blend` production files.
 - **Blender integration**: Custom add-on UI tools for hiding, showing, and managing chunks and environments on the fly.
 - **SDK architecture**: A modular, 7-stage pure Python pipeline with environment extensions.
 - **MCP integration**: Dedicated Model Context Protocol tools (`import_minecraft_world`, `generate_environment`) exposing the pipeline to AI agents.
