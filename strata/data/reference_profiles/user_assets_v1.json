@@ -1,0 +1,563 @@
+{
+  "schema_version": 1,
+  "profile_name": "user_assets_v1",
+  "generated_at": "2026-08-14T13:08:31.173189+00:00",
+  "source_files": [
+    {
+      "filename": "assets.blend",
+      "path": "D:\\Minecraft Animations\\Projects\\Animations\\assets.blend",
+      "sha256": "8889857f28dfaf7f2e28d59e3af5ef34e6401fcba70372551feaabadcdbf02bb",
+      "size_bytes": 4180558
+    }
+  ],
+  "assets": {
+    "Area.001": {
+      "object_name": "Area.001",
+      "object_type": "LIGHT",
+      "local_dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normalized_cell_anchor": [
+        -4.9888,
+        -0.534,
+        12.6401
+      ],
+      "material_slots": [],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Area.001",
+        "minecraft:area.001"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "BirchLeaf": {
+      "object_name": "BirchLeaf",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -1.558,
+        0.0089,
+        0.75
+      ],
+      "material_slots": [
+        "BirchLeaf"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "BirchLeaf",
+        "minecraft:birchleaf"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "BirchLog": {
+      "object_name": "BirchLog",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -1.558,
+        -0.9537,
+        0.75
+      ],
+      "material_slots": [
+        "BirchLog-Top",
+        "BirchLog-Side"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "BirchLog",
+        "minecraft:birchlog"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Clay": {
+      "object_name": "Clay",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -4.4726,
+        -1.9497,
+        0.75
+      ],
+      "material_slots": [
+        "Clay"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Clay",
+        "minecraft:clay"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Dirt": {
+      "object_name": "Dirt",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -5.4015,
+        -0.9537,
+        0.75
+      ],
+      "material_slots": [
+        "Dirt"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Dirt",
+        "minecraft:dirt"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Granite": {
+      "object_name": "Granite",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -4.4726,
+        -0.9537,
+        0.75
+      ],
+      "material_slots": [
+        "Granite"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Granite",
+        "minecraft:granite"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Gravel": {
+      "object_name": "Gravel",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -5.4015,
+        -1.9497,
+        0.75
+      ],
+      "material_slots": [
+        "Gravel"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Gravel",
+        "minecraft:gravel"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Oak-Leaves.005": {
+      "object_name": "Oak-Leaves.005",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -3.5074,
+        0.0089,
+        0.75
+      ],
+      "material_slots": [
+        "TaigaGrass-Side",
+        "TaigaGrass-Top",
+        "Grass-Bottom",
+        "SpruceLeaf"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Oak-Leaves.005",
+        "minecraft:oak-leaves.005"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "OakLeaf": {
+      "object_name": "OakLeaf",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -2.5206,
+        0.0089,
+        0.75
+      ],
+      "material_slots": [
+        "OakLeaf"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "OakLeaf",
+        "minecraft:oakleaf"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "OakLog": {
+      "object_name": "OakLog",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -2.5206,
+        -0.9537,
+        0.75
+      ],
+      "material_slots": [
+        "OakLog-Top",
+        "OakLog-Side"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "OakLog",
+        "minecraft:oaklog"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Plains-Grass": {
+      "object_name": "Plains-Grass",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -4.4726,
+        1.9911,
+        0.75
+      ],
+      "material_slots": [
+        "PlainGrass-Top"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Plains-Grass",
+        "minecraft:plains-grass"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Plains-GrassDirt": {
+      "object_name": "Plains-GrassDirt",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -5.4015,
+        0.0089,
+        0.75
+      ],
+      "material_slots": [
+        "PlainGrass-Top",
+        "PlainGrass-Side",
+        "Grass-Bottom"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Plains-GrassDirt",
+        "minecraft:plains-grassdirt"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "PlainsShortGrass": {
+      "object_name": "PlainsShortGrass",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.6293,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        0.0,
+        0.8675,
+        0.75
+      ],
+      "material_slots": [
+        "PlainsShortGrass"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "PlainsShortGrass",
+        "minecraft:plainsshortgrass"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Sand": {
+      "object_name": "Sand",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -4.4726,
+        0.0089,
+        0.75
+      ],
+      "material_slots": [
+        "Sand"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Sand",
+        "minecraft:sand"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "SpruceLeaf": {
+      "object_name": "SpruceLeaf",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -3.5074,
+        0.0089,
+        0.75
+      ],
+      "material_slots": [
+        "SpruceLeaf"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "SpruceLeaf",
+        "minecraft:spruceleaf"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "SpruceLog": {
+      "object_name": "SpruceLog",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -3.5074,
+        -0.9537,
+        0.75
+      ],
+      "material_slots": [
+        "SpruceLog-Side",
+        "SpruceLog-Top"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "SpruceLog",
+        "minecraft:sprucelog"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Stone": {
+      "object_name": "Stone",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -4.4726,
+        1.0,
+        0.75
+      ],
+      "material_slots": [
+        "Stone"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Stone",
+        "minecraft:stone"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Taiga-Grass": {
+      "object_name": "Taiga-Grass",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -5.4015,
+        1.9911,
+        0.75
+      ],
+      "material_slots": [
+        "TaigaGrass-Top"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Taiga-Grass",
+        "minecraft:taiga-grass"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "Taiga-GrassDirt": {
+      "object_name": "Taiga-GrassDirt",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.7192,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        -5.4015,
+        1.0,
+        0.75
+      ],
+      "material_slots": [
+        "TaigaGrass-Side",
+        "TaigaGrass-Top",
+        "Grass-Bottom"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "Taiga-GrassDirt",
+        "minecraft:taiga-grassdirt"
+      ],
+      "source_profile": "user_assets_v1"
+    },
+    "TaigaShortGrass": {
+      "object_name": "TaigaShortGrass",
+      "object_type": "MESH",
+      "local_dimensions": [
+        0.6293,
+        0.7192,
+        0.7192
+      ],
+      "normalized_cell_anchor": [
+        1.4743,
+        0.8675,
+        0.75
+      ],
+      "material_slots": [
+        "TaigaShortGrass"
+      ],
+      "hierarchy_parts": [],
+      "armature_bones": [],
+      "vertex_groups": [],
+      "constraints": [],
+      "recommended_motion_pivot": null,
+      "aliases": [
+        "TaigaShortGrass",
+        "minecraft:taigashortgrass"
+      ],
+      "source_profile": "user_assets_v1"
+    }
+  }
+}
