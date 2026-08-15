@@ -2,7 +2,7 @@
 
 **AI-native production pipeline for Blender.**
 
-[![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](https://github.com/KaartikeyKusshwaha/Strata)
+[![Version](https://img.shields.io/badge/version-v0.5.0-blue.svg)](https://github.com/KaartikeyKusshwaha/Strata)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Blender Version](https://img.shields.io/badge/blender-4.0+-orange.svg)](https://www.blender.org/download/)
