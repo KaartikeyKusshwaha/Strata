@@ -5,10 +5,11 @@ mutates and returns this same object -- see strata/stages/__init__.py.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Dict, List, Optional, Set, Tuple
+from typing import TYPE_CHECKING, Dict, List, Literal, Optional, Set, Tuple
 
 if TYPE_CHECKING:
     from strata.world_store import WorldStore
+    from strata.library_sources import TextureSource
 
 Block = Tuple[int, int, int, str]                            # (x, y, z, block_id)
 ChunkKey = Tuple[int, int]                                    # 2D (chunk_x, chunk_z)
@@ -29,6 +30,13 @@ class PipelineState:
     render_target: str = "eevee_cycles"
     stats: Dict[str, object] = field(default_factory=dict)
     environment_config: dict = field(default_factory=dict)
+
+    # Phase 3 extension fields
+    missing_asset_policy: Literal["generate", "error"] = "generate"
+    texture_sources: List[TextureSource] = field(default_factory=list)
+    own_library_mode: bool = False
+    reference_profile_name: str = "combined_v1"
+    ignored_non_block_assets: Set[str] = field(default_factory=set)
 
     @property
     def blocks(self) -> List[Block]:

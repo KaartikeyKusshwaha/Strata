@@ -17,7 +17,7 @@ stage -- see strata/stages/ and docs/ARCHITECTURE.md.
 """
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Literal, Optional, Tuple
 
 from .pipeline_state import PipelineState
 from .stages import (
@@ -28,6 +28,7 @@ from .environment import (
     build_clouds, build_atmosphere, build_sky, build_sun, build_water,
     CloudConfig, AtmosphereConfig, SkyConfig, SunConfig, WaterConfig,
 )
+from .library_sources import BuildEstimate, resolve_texture_stack
 from . import blender_io  # noqa: F401  (imported for save(); kept explicit for clarity)
 
 
@@ -45,7 +46,55 @@ class Pipeline:
 
     def use_library(self, library_blend_path: str) -> "Pipeline":
         self._state.library_blend_path = library_blend_path
+        self._state.own_library_mode = False
         return self
+
+    def use_texture_stack(
+        self,
+        minecraft_jar: str = "",
+        user_texture_packs: Tuple[str, ...] = (),
+        selected_texture_packs: Tuple[str, ...] = (),
+    ) -> "Pipeline":
+        """Configures texture precedence stack: user_packs (1st) -> selected_packs (2nd) -> minecraft_jar (3rd)."""
+        self._state.texture_sources = resolve_texture_stack(
+            minecraft_jar=minecraft_jar,
+            user_texture_packs=user_texture_packs,
+            selected_texture_packs=selected_texture_packs,
+        )
+        return self
+
+    def set_missing_asset_policy(self, policy: Literal["generate", "error"]) -> "Pipeline":
+        """Sets policy for unresolved assets: 'generate' (own-library fallback) or 'error' (stop build)."""
+        if policy not in ("generate", "error"):
+            raise ValueError(f"Invalid missing_asset_policy: {policy!r}. Must be 'generate' or 'error'.")
+        self._state.missing_asset_policy = policy
+        return self
+
+    def build_own_library(self, reference_profile: str = "combined_v1") -> "Pipeline":
+        """Enables own-library generator mode using committed reference profiles."""
+        self._state.own_library_mode = True
+        self._state.reference_profile_name = reference_profile
+        return self
+
+    def preflight_build(self, output_directory: str = "") -> BuildEstimate:
+        """Returns preflight build estimates without building geometry."""
+        stats = {}
+        if self._state.world_store:
+            stats = self._state.world_store.get_summary_stats()
+
+        texture_sources_dicts = [
+            {"kind": ts.kind, "path": ts.path, "sha256": ts.sha256}
+            for ts in self._state.texture_sources
+        ]
+
+        return BuildEstimate(
+            total_blocks=stats.get("total_blocks", len(self._state.blocks)),
+            visible_blocks=stats.get("visible_blocks", len(self._state.blocks)),
+            total_chunks=stats.get("visible_chunks", len(self._state.chunks)),
+            missing_assets=sorted(list(self._state.unmapped_block_ids)),
+            texture_sources=texture_sources_dicts,
+            missing_asset_policy=self._state.missing_asset_policy,
+        )
 
     def use_block_map(self, block_map_path: str) -> "Pipeline":
         self._state = ResolveAssetsStage().run(self._state, block_map_path=block_map_path)
@@ -56,6 +105,11 @@ class Pipeline:
         return self
 
     def build_chunks(self) -> "Pipeline":
+        if self._state.missing_asset_policy == "error" and self._state.unmapped_block_ids:
+            raise RuntimeError(
+                f"Missing asset policy 'error' triggered: {len(self._state.unmapped_block_ids)} missing assets "
+                f"({sorted(list(self._state.unmapped_block_ids))})"
+            )
         self._state = ChunkManagerStage().run(self._state)
         self._state = BuildGeometryStage(backend_name=self._geometry_backend_name).run(self._state)
         return self
@@ -101,7 +155,6 @@ class Pipeline:
             results["water"] = build_water(water_cfg)
         self._state.environment_config = results
         return self
-
 
     def save(self, output_blend_path: str) -> "Pipeline":
         result = blender_io.call("save_scene", output_blend_path=output_blend_path)
