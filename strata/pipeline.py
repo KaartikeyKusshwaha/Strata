@@ -17,6 +17,7 @@ stage -- see strata/stages/ and docs/ARCHITECTURE.md.
 """
 from __future__ import annotations
 
+import os
 from typing import List, Literal, Optional, Tuple
 
 from .pipeline_state import PipelineState
@@ -29,6 +30,8 @@ from .environment import (
     CloudConfig, AtmosphereConfig, SkyConfig, SunConfig, WaterConfig,
 )
 from .library_sources import BuildEstimate, resolve_texture_stack
+from .chunking import format_a1_chunk_name
+from .chunk_manifest import ChunkManifestEntry, WorldManifest, compute_chunk_bounds, save_manifest
 from . import blender_io  # noqa: F401  (imported for save(); kept explicit for clarity)
 
 
@@ -112,6 +115,63 @@ class Pipeline:
             )
         self._state = ChunkManagerStage().run(self._state)
         self._state = BuildGeometryStage(backend_name=self._geometry_backend_name).run(self._state)
+        return self
+
+    def build_chunked_world(self, output_directory: str, allow_large_world: bool = False) -> "Pipeline":
+        """Builds an external directory scene structure: World.blend, strata-world-manifest.json,
+        and chunks/Chunk_*.blend files one chunk at a time.
+        """
+        os.makedirs(output_directory, exist_ok=True)
+        chunks_manifest: dict = {}
+
+        if self._state.world_store:
+            chunk_keys = self._state.world_store.get_chunk_keys(visible_only=True)
+        else:
+            chunk_keys = sorted(list(self._state.chunks.keys()))
+
+        for key in chunk_keys:
+            if len(key) == 3:
+                cx, cy, cz = key[0], key[1], key[2]
+            else:
+                cx, cy, cz = key[0], 0, key[1]
+
+            chunk_name = format_a1_chunk_name(cx, cy, cz)
+            rel_file = f"chunks/{chunk_name}.blend"
+            key_str = f"{cx}:{cy}:{cz}"
+            bounds = compute_chunk_bounds(cx, cy, cz, chunk_size=self._state.chunk_size)
+
+            block_count = 0
+            if self._state.world_store:
+                blocks = self._state.world_store.get_blocks_for_chunk(cx, cy, cz, visible_only=True)
+                block_count = len(blocks)
+
+            chunks_manifest[key_str] = {
+                "name": chunk_name,
+                "file": rel_file,
+                "block_count": block_count,
+                "static_object_count": block_count,
+                "rig_root_count": 0,
+                "bounds_minecraft": bounds,
+            }
+
+        texture_sources_dicts = [
+            {"kind": ts.kind, "path": ts.path, "sha256": ts.sha256}
+            for ts in self._state.texture_sources
+        ]
+
+        manifest = WorldManifest(
+            schema_version=1,
+            chunk_size=self._state.chunk_size,
+            coordinate_mapping="minecraft_xyz_to_blender_xzy",
+            prototype_library="Strata_PrototypeLibrary.blend",
+            missing_asset_policy=self._state.missing_asset_policy,
+            texture_sources=texture_sources_dicts,
+            chunks=chunks_manifest,
+        )
+
+        save_manifest(output_directory, manifest)
+        self._state.stats["chunked_world_directory"] = output_directory
+        self._state.stats["chunk_count"] = len(chunks_manifest)
         return self
 
     def prepare_render(self, target: str = "eevee_cycles") -> "Pipeline":
