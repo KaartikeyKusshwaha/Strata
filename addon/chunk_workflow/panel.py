@@ -58,9 +58,18 @@ class VIEW3D_PT_MCChunkWorkflow(bpy.types.Panel):
         layout.label(text="Block Edit Tools")
         layout.operator("mc.show_selected_chunk", icon="RESTRICT_VIEW_OFF")
         layout.operator("mc.show_selected_neighbors", icon="OUTLINER_COLLECTION")
-
+        layout.operator("mc.make_selected_mesh_unique", icon="DUPLICATE")
 
         layout.separator()
+
+        # ------------------------------------------------------------------
+        # Chunk Streaming & Paging
+        # ------------------------------------------------------------------
+        layout.label(text="Chunk Streaming & Paging")
+        row = layout.row(align=True)
+        row.operator("mc.pin_selected_chunk", icon="PINNED")
+        row.operator("mc.unpin_selected_chunk", icon="UNPINNED")
+        layout.operator("mc.unload_all_chunks", icon="TRASH")
 
         layout.operator("mc.hide_all_chunks", icon="HIDE_ON")
         layout.operator("mc.show_all_chunks", icon="HIDE_OFF")

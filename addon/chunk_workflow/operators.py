@@ -357,16 +357,84 @@ class MC_OT_FinalRenderState(bpy.types.Operator):
         return {"FINISHED"}
 
 
-class MC_OT_PrintStats(bpy.types.Operator):
-    bl_idname = "mc.print_world_stats"
-    bl_label = "Print Stats"
-    bl_description = "Print chunk and object counts to the system console"
+class MC_OT_MakeSelectedMeshUnique(bpy.types.Operator):
+    bl_idname = "mc.make_selected_mesh_unique"
+    bl_label = "Make Selected Mesh Unique"
+    bl_description = "Duplicate mesh data for explicitly selected static block objects"
+    bl_options = {"REGISTER", "UNDO"}
 
     def execute(self, context):
-        stats = chunk_utils.world_stats()
-        print("MC_CHUNK_WORKFLOW STATS:", stats)
-        self.report({"INFO"}, str(stats))
+        from .paging import make_selected_mesh_unique
+        count = make_selected_mesh_unique()
+        self.report({"INFO"}, f"Duplicated mesh data for {count} selected static block object(s)")
         return {"FINISHED"}
+
+
+class MC_OT_UnloadAllChunks(bpy.types.Operator):
+    bl_idname = "mc.unload_all_chunks"
+    bl_label = "Unload All Chunks"
+    bl_description = "Unload all unpinned chunks from Blender memory"
+    bl_options = {"REGISTER", "UNDO"}
+
+    def execute(self, context):
+        chunks_parent = chunk_utils.chunks_parent()
+        if not chunks_parent:
+            self.report({"WARNING"}, "No MC_Chunks_16x16x16 collection found")
+            return {"CANCELLED"}
+
+        from .paging import unload_chunk_collection
+        count = 0
+        for child in list(chunks_parent.children):
+            if child.get("mc_kind") == "chunk":
+                if unload_chunk_collection(child.name):
+                    count += 1
+
+        self.report({"INFO"}, f"Unloaded {count} chunk collection(s)")
+        return {"FINISHED"}
+
+
+class MC_OT_PinSelectedChunk(bpy.types.Operator):
+    bl_idname = "mc.pin_selected_chunk"
+    bl_label = "Pin Selected Chunk"
+    bl_description = "Pin selected chunk collection to prevent LRU eviction"
+    bl_options = {"REGISTER", "UNDO"}
+
+    def execute(self, context):
+        if not context.selected_objects:
+            self.report({"WARNING"}, "No object selected")
+            return {"CANCELLED"}
+
+        obj = context.selected_objects[0]
+        for coll in obj.users_collection:
+            if coll.get("mc_kind") == "chunk":
+                coll["strata_pinned"] = True
+                self.report({"INFO"}, f"Pinned chunk {coll.name}")
+                return {"FINISHED"}
+
+        self.report({"WARNING"}, "Selected object does not belong to a chunk collection")
+        return {"CANCELLED"}
+
+
+class MC_OT_UnpinSelectedChunk(bpy.types.Operator):
+    bl_idname = "mc.unpin_selected_chunk"
+    bl_label = "Unpin Selected Chunk"
+    bl_description = "Unpin selected chunk collection to allow LRU eviction"
+    bl_options = {"REGISTER", "UNDO"}
+
+    def execute(self, context):
+        if not context.selected_objects:
+            self.report({"WARNING"}, "No object selected")
+            return {"CANCELLED"}
+
+        obj = context.selected_objects[0]
+        for coll in obj.users_collection:
+            if coll.get("mc_kind") == "chunk":
+                coll["strata_pinned"] = False
+                self.report({"INFO"}, f"Unpinned chunk {coll.name}")
+                return {"FINISHED"}
+
+        self.report({"WARNING"}, "Selected object does not belong to a chunk collection")
+        return {"CANCELLED"}
 
 
 # ---------------------------------------------------------------------------
@@ -391,6 +459,10 @@ CLASSES = (
     MC_OT_HideAllChunks,
     MC_OT_FinalRenderState,
     MC_OT_PrintStats,
+    MC_OT_MakeSelectedMeshUnique,
+    MC_OT_UnloadAllChunks,
+    MC_OT_PinSelectedChunk,
+    MC_OT_UnpinSelectedChunk,
 )
 
 
