@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Strata",
     "author": "KK",
-    "version": (0, 6, 0),
+    "version": (0, 7, 0),
     "blender": (4, 0, 0),
     "location": "View3D > Sidebar > Strata",
     "description": "Blender-side bridge for the Strata pipeline -- driven by strata.Pipeline, not used standalone",
